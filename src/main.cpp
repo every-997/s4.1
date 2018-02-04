@@ -1,20 +1,28 @@
-#include "mbed.h"
-#include "C12832.h"
+#include <mbed.h>
 
-// Using Arduino pin notation
-C12832 lcd(D11, D13, D12, D7, D10);
+Serial pc(USBTX, USBRX);
 
-int main()
+int main(void)
 {
-    int j=0;
-    lcd.cls();
-    lcd.locate(0,3);
-    lcd.printf("mbed application shield!");
-
-    while(true) {   // this is the third thread
-        lcd.locate(0,15);
-        lcd.printf("Counting : %d",j);
-        j++;
+    int q;
+    char c;
+    int n;
+    pc.puts("\e[4mHello\e[m is the K64F\n");
+    while (true) {
+      for( q=0 ; q<11 ; q++) {
+        pc.printf("%2d... ", q);
         wait(1.0);
+      }
+      pc.putc('\n');
+      pc.printf("Press any key to continue...\n");
+      c = pc.getc();
+      pc.printf("(%c) Enter a number:", c);
+      pc.scanf("%d", &n);
+      pc.printf("Countdown ");
+      for( q=n ; q>0 ; q-=1) {
+        pc.printf("%d. ", q);
+        wait(1);
+      }
+      pc.puts("go\n");
     }
 }
