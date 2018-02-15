@@ -18,11 +18,13 @@ int main(void)
       c = pc.getc();
       pc.printf("(%c) Enter a number:", c);
       pc.scanf("%d", &n);
-      pc.printf("Countdown ");
+      pc.printf("\nCountdown: ");
       for( q=n ; q>0 ; q-=1) {
         pc.printf("%d. ", q);
         wait(1);
       }
-      pc.puts("go\n");
+      //pc.puts("GO!\n");
+      pc.puts("\nMain engine start...\n");
+      pc.puts("and we have liftoff!\n");
     }
 }
